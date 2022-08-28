@@ -10,7 +10,7 @@ import pickle
 from DCA.ed_ranker import EDRanker
 import csv
 import time
-
+import os
 import numpy as np
 
 
@@ -147,11 +147,11 @@ np.random.seed(args.seed)
 if use_cuda:
     torch.cuda.manual_seed(args.seed)   # set random seed for present GPU
 
-datadir = '../data/generated/test_train_data'
-conll_path = '../data/basic_data/test_datasets'
-person_path = '../data/basic_data/p_e_m_data/persons.txt'
-voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
-ent_inlinks_path = "../data/entityid_dictid_inlinks_uniq.pkl"
+datadir = f'{os.getcwd()}/data/generated/test_train_data'
+conll_path = f'{os.getcwd()}/data/basic_data/test_datasets'
+person_path = f'{os.getcwd()}/data/basic_data/p_e_m_data/persons.txt'
+voca_emb_dir = f"{os.getcwd()}/data/generated/embeddings/word_ent_embs/"
+ent_inlinks_path = f"{os.getcwd()}/data/entityid_dictid_inlinks_uniq.pkl"
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 
@@ -214,6 +214,7 @@ if __name__ == "__main__":
                     ('wikipedia', conll.wikipedia)
                 ]
 
+    os.makedirs(os.pth.dirname(F1_CSV_Path), exist_ok=True)
     with open(F1_CSV_Path, 'w') as f_csv_f1:
         f1_csv_writer = csv.writer(f_csv_f1)
         f1_csv_writer.writerow(['dataset', 'epoch', 'dynamic', 'F1 Score'])
