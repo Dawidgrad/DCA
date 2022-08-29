@@ -15,6 +15,7 @@ import copy
 import csv
 import json
 import time
+import os
 
 ModelClass = MulRelRanker
 wiki_prefix = 'en.wikipedia.org/wiki/'
@@ -64,7 +65,7 @@ class EDRanker:
         self.model.cuda()
 
     def load_ent_desc(self, max_desc_len, n_grams):
-        ent_desc = json.load(open(f'{os.getcwd()}/data/ent2desc.json', 'r'))
+        ent_desc = json.load(open(f'{os.getcwd()}/data/ent2desc.json', 'r', encoding='utf8'))
         self.ent_desc = [[self.word_vocab.get_id(Vocabulary.unk_token) for j in range(max_desc_len)] for i in range(self.ent_vocab.size())]
         self.desc_mask = [[0 for j in range(max_desc_len-n_grams+1)] for i in range(self.ent_vocab.size())]
         for ent in ent_desc:

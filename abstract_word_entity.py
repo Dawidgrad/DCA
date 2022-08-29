@@ -75,7 +75,7 @@ class AbstractWordEntity(nn.Module):
                     config[k] = v
 
             with io.open(path + '.config', 'w', encoding='utf8') as f:
-                json.dump(config, f)
+                json.dump(list(config), f)
 
     def load_params(self, path, param_names):
         params = torch.load(path)

@@ -101,7 +101,7 @@ parser.add_argument("--hid_dims", type=int,
 # args for training
 parser.add_argument("--n_epochs", type=int,
                     help="max number of epochs",
-                    default=500)
+                    default=50)
 parser.add_argument("--dev_f1_change_lr", type=float,
                     help="dev f1 to change learning rate",
                     default=0.928)
@@ -214,7 +214,7 @@ if __name__ == "__main__":
                     ('wikipedia', conll.wikipedia)
                 ]
 
-    os.makedirs(os.pth.dirname(F1_CSV_Path), exist_ok=True)
+    os.makedirs(os.path.dirname(F1_CSV_Path), exist_ok=True)
     with open(F1_CSV_Path, 'w') as f_csv_f1:
         f1_csv_writer = csv.writer(f_csv_f1)
         f1_csv_writer.writerow(['dataset', 'epoch', 'dynamic', 'F1 Score'])
